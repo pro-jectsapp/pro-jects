@@ -2,6 +2,8 @@
   width: 100%
   height: 100vh
   overflow: hidden
+  display: flex
+  flex-direction: column
 
 .nav
   width: 100%
@@ -18,23 +20,24 @@
 
   .nav-block__image
     margin: 0 10px
+    height: 32px
+    width: 32px
+
+  .nav-block__image--rounded
+    border-radius: 50%
 
   .nav-block__heading
     margin: 0
-    font-weight: normal
 
 .app
-  height: 100%
   width: 100%
+  flex: 1
 
-  rsz-layout.row
-    height: 100%
-
-  rsz-layout.cell
-    border-top: none
-
-    &:nth-child(1)
-      border-left: none
-
-    &:nth-last-child(1)
-      border-right: none
+.bar
+  background-color: #0366d6
+  font-size: 12px
+  padding: 2px
+  color: white
+  display: flex
+  align-items: center
+  justify-content: space-between

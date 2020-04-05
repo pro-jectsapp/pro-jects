@@ -1,0 +1,44 @@
+<div class="wrapper">
+  <nav class="nav">
+    <div class="nav-block"></div>
+    <div class="nav-block">
+      <img
+        src="/assets/images/GitHub-Mark-Light-64px.png"
+        alt="GitHub Mark"
+        class="nav-block__image"
+      />
+      <h3 class="nav-block__heading">(pro)jects</h3>
+    </div>
+    <div class="nav-block">
+      <img
+        src="{{ githubService.ghUser.avatar_url }}"
+        *ngIf="githubService.ghUser"
+        class="nav-block__image nav-block__image--rounded"
+      />
+    </div>
+  </nav>
+  <div class="app">
+    <as-split unit="percent" direction="horizontal">
+      <as-split-area size="25">
+        <app-projects-list></app-projects-list>
+      </as-split-area>
+      <as-split-area size="75" minSize="65">
+        <app-project-view></app-project-view>
+      </as-split-area>
+    </as-split>
+  </div>
+  <div class="bar">
+    <div>
+      Project:
+      <b>{{
+        projectService.currentProject
+          ? projectService.currentProject.name
+          : "You haven't selected any project yet"
+      }}</b>
+    </div>
+    <div></div>
+    <div>
+      Authenticated as <b>{{ githubService.ghUser ? githubService.ghUser.login : '...' }}</b>
+    </div>
+  </div>
+</div>
