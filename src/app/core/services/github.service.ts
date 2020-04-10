@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Octokit } from '@octokit/rest';
+import { Octokit } from '@octokit/rest/dist-web';
 
 import { token } from '../../../auth-token';
 
@@ -8,6 +8,7 @@ import { token } from '../../../auth-token';
 })
 export class GithubService {
   private octokit: Octokit;
+  private allProjects: any[];
   ghUser: any;
 
   constructor() {
@@ -16,7 +17,6 @@ export class GithubService {
 
   async checkUser(): Promise<void> {
     if (this.ghUser) {
-      console.log(this.ghUser);
       return;
     } else {
       const res = await this.octokit.users.getAuthenticated();
@@ -27,12 +27,15 @@ export class GithubService {
   async getUserProjects(): Promise<any> {
     await this.checkUser();
     const projects = await this.octokit.projects.listForUser({ username: this.ghUser.login });
+    this.allProjects = projects.data;
     return projects.data;
   }
 
   async getProject(projectId: number): Promise<any> {
     await this.checkUser();
-    const project = await this.octokit.projects.get({ project_id: projectId });
-    return project.data;
+    const project =
+      this.allProjects.find((data) => data.id === projectId) ||
+      (await this.octokit.projects.get({ project_id: projectId })).data;
+    return project;
   }
 }

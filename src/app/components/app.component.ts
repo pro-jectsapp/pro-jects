@@ -7,12 +7,8 @@ import { ProjectService } from '../core/services/project.service';
   templateUrl: '../views/app/app.component.html',
   styleUrls: ['../views/app/app.component.styl'],
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   user: any;
 
   constructor(public githubService: GithubService, public projectService: ProjectService) {}
-
-  ngOnInit(): void {
-    this.githubService.checkUser();
-  }
 }

@@ -1,7 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { MatIconModule } from '@angular/material/icon';
 import { AngularSplitModule } from 'angular-split';
+import { MonacoEditorModule } from 'ngx-monaco-editor';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './components/app.component';
@@ -12,7 +15,14 @@ import { ProjectViewComponent } from './components/project-view.component';
 
 @NgModule({
   declarations: [AppComponent, ProjectsListComponent, ProjectViewComponent],
-  imports: [BrowserModule, AppRoutingModule, AngularSplitModule.forRoot()],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    AngularSplitModule.forRoot(),
+    BrowserAnimationsModule,
+    MatIconModule,
+    MonacoEditorModule.forRoot()
+  ],
   providers: [GithubService, ProjectService],
   bootstrap: [AppComponent],
 })
