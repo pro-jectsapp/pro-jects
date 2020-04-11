@@ -1,4 +1,4 @@
-<div class="project-view__wrapper">
+<div class="project-view__wrapper" *ngIf="projectService.currentProject; else noProjectBlock">
   <div class="project-view-bar">
     <mat-icon
       class="project-view-bar__icon project-view-bar__icon--active"
@@ -8,6 +8,25 @@
     <mat-icon class="project-view-bar__icon">dashboard</mat-icon>
   </div>
   <div class="project-view">
-    dupa
+    <div class="columns-list__wrapper">
+      <span class="columns-list__header">Columns</span>
+      <ul class="columns-list">
+        <li
+          *ngFor="let column of projectService.currentProject.columns"
+          (click)="onColumnClicked(column)"
+        >
+          {{ column.name }}
+        </li>
+      </ul>
+    </div>
+    <div class="cards-view" *ngIf="selectedColumn">
+      <div class="card" *ngFor="let card of selectedColumn.cards" [innerHTML]="card.note | markdownParse">
+      </div>
+    </div>
   </div>
 </div>
+<ng-template #noProjectBlock>
+  <div class="no-project">
+    No project selected
+  </div>
+</ng-template>

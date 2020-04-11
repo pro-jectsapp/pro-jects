@@ -12,6 +12,12 @@ export class ProjectService {
 
   async setCurrentProject(projectId: number): Promise<void> {
     this.currentProject = await this.githubService.getProject(projectId);
+    this.currentProject.columns = await this.githubService.getProjectColumns(projectId);
+
+    for (const col of this.currentProject.columns) {
+      col.cards = await this.githubService.getColumnCards(col.id);
+    }
+
     this.projectChanged.emit(this.currentProject);
   }
 }

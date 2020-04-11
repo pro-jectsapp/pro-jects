@@ -12,16 +12,17 @@ import { ProjectsListComponent } from './components/projects-list.component';
 import { GithubService } from './core/services/github.service';
 import { ProjectService } from './core/services/project.service';
 import { ProjectViewComponent } from './components/project-view.component';
+import { MarkdownParsePipe } from './core/utils/markdown-parse.pipe';
 
 @NgModule({
-  declarations: [AppComponent, ProjectsListComponent, ProjectViewComponent],
+  declarations: [AppComponent, ProjectsListComponent, ProjectViewComponent, MarkdownParsePipe],
   imports: [
     BrowserModule,
     AppRoutingModule,
     AngularSplitModule.forRoot(),
     BrowserAnimationsModule,
     MatIconModule,
-    MonacoEditorModule.forRoot()
+    MonacoEditorModule.forRoot(),
   ],
   providers: [GithubService, ProjectService],
   bootstrap: [AppComponent],

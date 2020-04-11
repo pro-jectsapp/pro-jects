@@ -33,9 +33,19 @@ export class GithubService {
 
   async getProject(projectId: number): Promise<any> {
     await this.checkUser();
-    const project =
-      this.allProjects.find((data) => data.id === projectId) ||
-      (await this.octokit.projects.get({ project_id: projectId })).data;
-    return project;
+    return (
+      this.allProjects.find(data => data.id === projectId) ||
+      (await this.octokit.projects.get({ project_id: projectId })).data
+    );
+  }
+
+  async getProjectColumns(projectId: number): Promise<any> {
+    await this.checkUser();
+    return (await this.octokit.projects.listColumns({ project_id: projectId })).data;
+  }
+
+  async getColumnCards(columnId: number): Promise<any> {
+    await this.checkUser();
+    return (await this.octokit.projects.listCards({ column_id: columnId })).data;
   }
 }
