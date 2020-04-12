@@ -18,12 +18,12 @@
     </div>
   </nav>
   <div class="app">
-    <as-split unit="percent" direction="horizontal">
+    <as-split unit="percent" direction="horizontal" useTransition="true">
       <as-split-area size="25">
         <app-projects-list></app-projects-list>
       </as-split-area>
-      <as-split-area size="75" minSize="65">
-        <app-project-view></app-project-view>
+      <as-split-area size="75" minSize="50">
+        <app-project-view (columnSelected)="onColumnSelected()"></app-project-view>
       </as-split-area>
     </as-split>
   </div>

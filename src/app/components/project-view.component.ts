@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ProjectService } from '../core/services/project.service';
-import marked from 'marked';
 
 @Component({
   selector: 'app-project-view',
@@ -9,17 +8,20 @@ import marked from 'marked';
 })
 export class ProjectViewComponent implements OnInit {
   selectedColumn: any;
+  @Output() columnSelected = new EventEmitter();
 
   constructor(public projectService: ProjectService) {}
 
   ngOnInit(): void {
     this.projectService.projectChanged.subscribe(() => {
-      console.log(this.projectService.currentProject);
+      this.selectedColumn = undefined;
     });
-    console.log(marked('dupa'));
   }
 
   onColumnClicked(column): void {
+    if (!this.selectedColumn) {
+      this.columnSelected.emit();
+    }
     this.selectedColumn = column;
   }
 }

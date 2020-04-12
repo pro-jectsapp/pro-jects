@@ -14,6 +14,8 @@
         <li
           *ngFor="let column of projectService.currentProject.columns"
           (click)="onColumnClicked(column)"
+          class="columns-list__item"
+          [class]="selectedColumn ? (selectedColumn.id === column.id ? 'columns-list__item--selected': '') : ''"
         >
           {{ column.name }}
         </li>
