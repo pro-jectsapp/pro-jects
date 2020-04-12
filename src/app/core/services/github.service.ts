@@ -41,11 +41,30 @@ export class GithubService {
 
   async getProjectColumns(projectId: number): Promise<any> {
     await this.checkUser();
-    return (await this.octokit.projects.listColumns({ project_id: projectId })).data;
+    return (
+      await this.octokit.projects.listColumns({
+        project_id: projectId,
+        headers: {
+          'If-None-Match': '',
+        },
+      })
+    ).data;
   }
 
   async getColumnCards(columnId: number): Promise<any> {
     await this.checkUser();
-    return (await this.octokit.projects.listCards({ column_id: columnId })).data;
+    return (
+      await this.octokit.projects.listCards({
+        column_id: columnId,
+        headers: {
+          'If-None-Match': '',
+        },
+      })
+    ).data;
+  }
+
+  async moveCard(cardId, pos): Promise<void> {
+    await this.checkUser();
+    await this.octokit.projects.moveCard({ card_id: cardId, position: pos });
   }
 }

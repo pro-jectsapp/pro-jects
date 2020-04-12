@@ -22,4 +22,17 @@ export class ProjectService {
 
     this.projectChanged.emit(this.currentProject);
   }
+
+  async refreshProjectColumns(): Promise<void> {
+    this.currentProject.columns = await this.githubService.getProjectColumns(this.currentProject.id);
+    for (const col of this.currentProject.columns) {
+      col.cards = await this.githubService.getColumnCards(col.id);
+    }
+  }
+
+  async refreshProjectCards(): Promise<void> {
+    for (const col of this.currentProject.columns) {
+      col.cards = await this.githubService.getColumnCards(col.id);
+    }
+  }
 }
