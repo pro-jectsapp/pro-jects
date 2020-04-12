@@ -15,14 +15,27 @@
           *ngFor="let column of projectService.currentProject.columns"
           (click)="onColumnClicked(column)"
           class="columns-list__item"
-          [class]="selectedColumn ? (selectedColumn.id === column.id ? 'columns-list__item--selected': '') : ''"
+          [class]="
+            selectedColumn
+              ? selectedColumn.id === column.id
+                ? 'columns-list__item--selected'
+                : ''
+              : ''
+          "
         >
           {{ column.name }}
         </li>
       </ul>
     </div>
     <div class="cards-view" *ngIf="selectedColumn">
-      <div class="card" *ngFor="let card of selectedColumn.cards" [innerHTML]="card.note | markdownParse">
+      <div class="card" *ngFor="let card of selectedColumn.cards; index as i">
+        <div class="card__bar">
+          <div>
+            <mat-icon class="card__bar__icon" (click)="moveCard(card, i - 1)">arrow_upward</mat-icon>
+            <mat-icon class="card__bar__icon" (click)="moveCard(card, i + 1)">arrow_downward</mat-icon>
+          </div>
+        </div>
+        <div class="card__content" [innerHTML]="card.note | markdownParse"></div>
       </div>
     </div>
   </div>

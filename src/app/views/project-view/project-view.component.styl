@@ -5,6 +5,11 @@
   flex-direction: column
   background-color: #fafbfc
 
+.project-view
+  width: 100%
+  flex: 1
+  display: flex
+
 .project-view-bar
   width: 100%
   background-color: #ffffff
@@ -14,18 +19,13 @@
   color: #161515
   padding: 2px 17px
 
-  .project-view-bar__icon
+  &__icon
     color: gray
     margin: 0 2px
     cursor: pointer
 
-  .project-view-bar__icon--active
+  &__icon--active
     color: black
-
-.project-view
-  width: 100%
-  flex: 1
-  display: flex
 
 .cards-view
   width: 100%
@@ -36,7 +36,26 @@
     border-radius: 5px
     background-color: #ffffff
     margin: 10px
-    padding: 0 10px
+
+    &__content
+      padding: 0 10px
+
+      *
+        margin-top: 0
+        margin-bottom: .5em
+
+      *:last-child
+        margin-bottom: 1em
+
+    &__bar
+      padding: 10px
+
+      &__icon
+        color: grey
+        width: 15px
+        height: 15px
+        font-size: 15px
+        cursor: pointer
 
 .columns-list__wrapper
   width: 200px
@@ -58,7 +77,7 @@
     padding: 0
     margin: 0
 
-    .columns-list__item
+    &__item
       margin: 0
       width: 100%
       padding: 7px 0
@@ -69,7 +88,7 @@
       &:hover
         background-color: #f5f6f7
 
-    .columns-list__item--selected
+    &__item--selected
       background-color: #f5f6f7
 
 .no-project

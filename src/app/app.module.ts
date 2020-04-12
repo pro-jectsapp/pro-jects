@@ -13,9 +13,16 @@ import { GithubService } from './core/services/github.service';
 import { ProjectService } from './core/services/project.service';
 import { ProjectViewComponent } from './components/project-view.component';
 import { MarkdownParsePipe } from './core/utils/markdown-parse.pipe';
+import { SafeHtmlPipe } from './core/utils/safe-html.pipe';
 
 @NgModule({
-  declarations: [AppComponent, ProjectsListComponent, ProjectViewComponent, MarkdownParsePipe],
+  declarations: [
+    AppComponent,
+    ProjectsListComponent,
+    ProjectViewComponent,
+    MarkdownParsePipe,
+    SafeHtmlPipe,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

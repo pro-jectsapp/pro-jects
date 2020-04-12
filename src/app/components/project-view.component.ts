@@ -1,10 +1,11 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
 import { ProjectService } from '../core/services/project.service';
 
 @Component({
   selector: 'app-project-view',
   templateUrl: '../views/project-view/project-view.component.html',
   styleUrls: ['../views/project-view/project-view.component.styl'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class ProjectViewComponent implements OnInit {
   selectedColumn: any;
@@ -23,5 +24,11 @@ export class ProjectViewComponent implements OnInit {
       this.columnSelected.emit();
     }
     this.selectedColumn = column;
+  }
+
+  moveCard(card, pos): void {
+    if (pos >= 0 && pos < this.selectedColumn.cards.length) {
+      console.log(card, pos);
+    }
   }
 }
