@@ -36,6 +36,7 @@
         "
         (moveUp)="moveCard(card, i - 1, i)"
         (moveDown)="moveCard(card, i + 1, i)"
+        (delete)="deleteCard(card, i)"
         [card]="card"
       >
       </app-card>

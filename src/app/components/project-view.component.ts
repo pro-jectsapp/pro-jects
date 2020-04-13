@@ -25,7 +25,11 @@ export class ProjectViewComponent implements OnInit {
 
   constructor(public projectService: ProjectService, private githubService: GithubService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.projectService.projectChanged.subscribe(() => {
+      this.selectedColumn = undefined;
+    });
+  }
 
   onColumnClicked(column): void {
     if (!this.selectedColumn) {
@@ -55,6 +59,13 @@ export class ProjectViewComponent implements OnInit {
 
       this.githubService.moveCard(card.id, positionFormatted);
       this.projectService.currentProject.columns[this.selectedColumn].cards.move(oldPos, pos);
+    }
+  }
+
+  deleteCard(card, pos): void {
+    if (confirm('Are you sure to delete this card?')) {
+      this.projectService.currentProject.columns[this.selectedColumn].cards.splice(pos, 1);
+      this.githubService.deleteCard(card.id);
     }
   }
 }

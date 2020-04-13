@@ -17,6 +17,7 @@ export class CardComponent {
   @Input() card: any;
   @Output() moveUp = new EventEmitter();
   @Output() moveDown = new EventEmitter();
+  @Output() delete = new EventEmitter();
   isEditing = false;
   isBusy = false;
 
@@ -59,5 +60,9 @@ export class CardComponent {
     this.editorContent = '';
     this.isEditing = false;
     this.isBusy = false;
+  }
+
+  onDelete() {
+    this.delete.emit();
   }
 }

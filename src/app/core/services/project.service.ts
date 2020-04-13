@@ -14,11 +14,11 @@ export class ProjectService {
     this.currentProject = await this.githubService.getProject(projectId);
     this.currentProject.columns = await this.githubService.getProjectColumns(projectId);
 
+    this.projectChanged.emit(this.currentProject);
+
     for (const col of this.currentProject.columns) {
       col.cards = await this.githubService.getColumnCards(col.id);
     }
-
-    this.projectChanged.emit(this.currentProject);
   }
 
   async refreshProjectColumns(): Promise<void> {

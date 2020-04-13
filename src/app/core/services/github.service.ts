@@ -72,4 +72,9 @@ export class GithubService {
     await this.checkUser();
     await this.octokit.projects.updateCard({ card_id: cardId, note });
   }
+
+  async deleteCard(cardId): Promise<void> {
+    await this.checkUser();
+    await this.octokit.projects.deleteCard({ card_id: cardId });
+  }
 }
