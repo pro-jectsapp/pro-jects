@@ -7,6 +7,11 @@ Array.prototype.move = function (from, to) {
   this.splice(to, 0, this.splice(from, 1)[0]);
 };
 
+enum ViewMode {
+  Switch,
+  Columns,
+}
+
 @Component({
   selector: 'app-project-view',
   templateUrl: '../views/project-view/project-view.component.html',
@@ -16,14 +21,11 @@ Array.prototype.move = function (from, to) {
 export class ProjectViewComponent implements OnInit {
   selectedColumn: number;
   @Output() columnSelected = new EventEmitter();
+  viewMode: ViewMode = ViewMode.Switch;
 
   constructor(public projectService: ProjectService, private githubService: GithubService) {}
 
-  ngOnInit(): void {
-    this.projectService.projectChanged.subscribe(() => {
-      this.selectedColumn = undefined;
-    });
-  }
+  ngOnInit(): void {}
 
   onColumnClicked(column): void {
     if (!this.selectedColumn) {
@@ -51,10 +53,7 @@ export class ProjectViewComponent implements OnInit {
           }
       }
 
-      this.githubService.moveCard(card.id, positionFormatted).then(() => {
-        this.projectService.refreshProjectCards();
-      });
-
+      this.githubService.moveCard(card.id, positionFormatted);
       this.projectService.currentProject.columns[this.selectedColumn].cards.move(oldPos, pos);
     }
   }

@@ -1,0 +1,30 @@
+<div class="card">
+  <div class="card__bar">
+    <ng-container *ngIf="!isEditing; else editorButtons">
+      <div>
+        <mat-icon class="card__bar__icon" (click)="onMove(0)">arrow_upward</mat-icon>
+        <mat-icon class="card__bar__icon" (click)="onMove(1)">arrow_downward</mat-icon>
+      </div>
+      <div>
+        <mat-icon class="card__bar__icon" (click)="startEditing()">create</mat-icon>
+      </div>
+    </ng-container>
+    <ng-template #editorButtons>
+      dupa
+    </ng-template>
+  </div>
+  <div
+    class="card__content"
+    [innerHTML]="card.note | markdownParse | safeHtml"
+    *ngIf="!isEditing; else editor"
+  ></div>
+  <ng-template #editor>
+    <div class="card__editor">
+      <ngx-monaco-editor
+        [options]="editorOptions"
+        [(ngModel)]="editorContent"
+        style="height: 100%"
+      ></ngx-monaco-editor>
+    </div>
+  </ng-template>
+</div>

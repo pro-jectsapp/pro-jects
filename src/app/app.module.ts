@@ -14,6 +14,8 @@ import { ProjectService } from './core/services/project.service';
 import { ProjectViewComponent } from './components/project-view.component';
 import { MarkdownParsePipe } from './core/utils/markdown-parse.pipe';
 import { SafeHtmlPipe } from './core/utils/safe-html.pipe';
+import { CardComponent } from './components/card.component';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -22,6 +24,7 @@ import { SafeHtmlPipe } from './core/utils/safe-html.pipe';
     ProjectViewComponent,
     MarkdownParsePipe,
     SafeHtmlPipe,
+    CardComponent,
   ],
   imports: [
     BrowserModule,
@@ -30,6 +33,7 @@ import { SafeHtmlPipe } from './core/utils/safe-html.pipe';
     BrowserAnimationsModule,
     MatIconModule,
     MonacoEditorModule.forRoot(),
+    FormsModule,
   ],
   providers: [GithubService, ProjectService],
   bootstrap: [AppComponent],

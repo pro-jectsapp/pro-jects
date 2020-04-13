@@ -11,8 +11,6 @@ export class ProjectService {
   constructor(private githubService: GithubService) {}
 
   async setCurrentProject(projectId: number): Promise<void> {
-    this.currentProject = undefined;
-
     this.currentProject = await this.githubService.getProject(projectId);
     this.currentProject.columns = await this.githubService.getProjectColumns(projectId);
 

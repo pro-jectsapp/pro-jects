@@ -3,20 +3,21 @@
     <mat-icon
       class="project-view-bar__icon project-view-bar__icon--active"
       style="transform: scale(1.25);"
+      title="Column Switch View"
       >vertical_split</mat-icon
     >
-    <mat-icon class="project-view-bar__icon">dashboard</mat-icon>
+    <mat-icon class="project-view-bar__icon" title="Column View">dashboard</mat-icon>
   </div>
   <div class="project-view">
     <div class="columns-list__wrapper">
       <span class="columns-list__header">Columns</span>
       <ul class="columns-list">
         <li
-          *ngFor="let column of projectService.currentProject.columns; index as i"
+          *ngFor="let column of this.projectService.currentProject.columns; index as i"
           (click)="onColumnClicked(i)"
           class="columns-list__item"
           [class]="
-            selectedColumn
+            selectedColumn !== undefined
               ? this.projectService.currentProject.columns[selectedColumn].id === column.id
                 ? 'columns-list__item--selected'
                 : ''
@@ -27,16 +28,17 @@
         </li>
       </ul>
     </div>
-    <div class="cards-view" *ngIf="selectedColumn !== undefined">
-      <div class="card" *ngFor="let card of this.projectService.currentProject.columns[selectedColumn].cards; index as i">
-        <div class="card__bar">
-          <div>
-            <mat-icon class="card__bar__icon" (click)="moveCard(card, i - 1, i)">arrow_upward</mat-icon>
-            <mat-icon class="card__bar__icon" (click)="moveCard(card, i + 1, i)">arrow_downward</mat-icon>
-          </div>
-        </div>
-        <div class="card__content" [innerHTML]="card.note | markdownParse"></div>
-      </div>
+    <div class="cards-view--switch-view" *ngIf="selectedColumn !== undefined">
+      <app-card
+        *ngFor="
+          let card of this.projectService.currentProject.columns[selectedColumn].cards;
+          index as i
+        "
+        (moveUp)="moveCard(card, i - 1, i)"
+        (moveDown)="moveCard(card, i + 1, i)"
+        [card]="card"
+      >
+      </app-card>
     </div>
   </div>
 </div>
