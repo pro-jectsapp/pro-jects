@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatIconModule } from '@angular/material/icon';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { AngularSplitModule } from 'angular-split';
 import { MonacoEditorModule } from 'ngx-monaco-editor';
 
@@ -15,7 +16,7 @@ import { ProjectViewComponent } from './components/project-view.component';
 import { MarkdownParsePipe } from './core/utils/markdown-parse.pipe';
 import { SafeHtmlPipe } from './core/utils/safe-html.pipe';
 import { CardComponent } from './components/card.component';
-import {FormsModule} from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import {FormsModule} from '@angular/forms';
     MatIconModule,
     MonacoEditorModule.forRoot(),
     FormsModule,
+    MatProgressSpinnerModule,
   ],
   providers: [GithubService, ProjectService],
   bootstrap: [AppComponent],

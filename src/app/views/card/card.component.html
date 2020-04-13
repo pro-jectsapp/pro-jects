@@ -10,7 +10,24 @@
       </div>
     </ng-container>
     <ng-template #editorButtons>
-      dupa
+      <div>
+        <mat-icon class="card__bar__icon icon__save card__bar__icon--big" (click)="saveCard()"
+          >save</mat-icon
+        >
+      </div>
+      <div>
+        <mat-spinner diameter="20" *ngIf="isBusy"></mat-spinner>
+      </div>
+      <div>
+        <mat-icon
+          class="card__bar__icon icon__done card__bar__icon--big"
+          (click)="saveCardAndCloseEditor()"
+          >done</mat-icon
+        >
+        <mat-icon class="card__bar__icon icon__close card__bar__icon--big" (click)="closeEditor()"
+          >close</mat-icon
+        >
+      </div>
     </ng-template>
   </div>
   <div
@@ -23,7 +40,7 @@
       <ngx-monaco-editor
         [options]="editorOptions"
         [(ngModel)]="editorContent"
-        style="height: 100%"
+        style="height: 100%;"
       ></ngx-monaco-editor>
     </div>
   </ng-template>

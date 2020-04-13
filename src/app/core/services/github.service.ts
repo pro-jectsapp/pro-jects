@@ -67,4 +67,9 @@ export class GithubService {
     await this.checkUser();
     await this.octokit.projects.moveCard({ card_id: cardId, position: pos });
   }
+
+  async saveCard(cardId, note): Promise<void> {
+    await this.checkUser();
+    await this.octokit.projects.updateCard({ card_id: cardId, note });
+  }
 }

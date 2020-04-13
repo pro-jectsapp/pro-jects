@@ -1,4 +1,6 @@
-import {Component, EventEmitter, Input, Output, ViewEncapsulation} from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
+import { GithubService } from '../core/services/github.service';
+import { ProjectService } from '../core/services/project.service';
 
 enum Direction {
   Up,
@@ -16,9 +18,12 @@ export class CardComponent {
   @Output() moveUp = new EventEmitter();
   @Output() moveDown = new EventEmitter();
   isEditing = false;
+  isBusy = false;
 
   editorOptions = { theme: 'vs-dark', language: 'markdown', automaticLayout: true };
   editorContent = '';
+
+  constructor(private githubService: GithubService, private projectService: ProjectService) {}
 
   onMove(direction: Direction) {
     if (direction === Direction.Up) {
@@ -34,17 +39,25 @@ export class CardComponent {
   }
 
   async saveCard(): Promise<void> {
-    console.log(this.editorContent);
+    this.isBusy = true;
+    await this.githubService.saveCard(this.card.id, this.editorContent);
+    this.isBusy = false;
   }
 
-  closeEditor() {
+  async closeEditor() {
+    this.isBusy = true;
+    await this.projectService.refreshProjectCards();
     this.editorContent = '';
     this.isEditing = false;
+    this.isBusy = false;
   }
 
-  saveCardAndCloseEditor() {
-    this.saveCard().then(() => {
-      this.closeEditor();
-    });
+  async saveCardAndCloseEditor() {
+    this.isBusy = true;
+    await this.githubService.saveCard(this.card.id, this.editorContent);
+    await this.projectService.refreshProjectCards();
+    this.editorContent = '';
+    this.isEditing = false;
+    this.isBusy = false;
   }
 }
