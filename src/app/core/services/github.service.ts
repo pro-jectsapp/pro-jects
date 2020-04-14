@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Octokit } from '@octokit/rest/dist-web';
 
-import { token } from '../../../auth-token';
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -14,7 +13,7 @@ export class GithubService {
 
   constructor(private authService: AuthService) {
     if (authService.isLoggedIn()) {
-      this.octokit = new Octokit({ auth: token, userAgent: '(pro)jects v.0.1.0' });
+      this.octokit = new Octokit({ auth: authService.getUser(), userAgent: '(pro)jects v.0.1.0' });
     }
 
     this.authService.loggedIn.subscribe(() => {

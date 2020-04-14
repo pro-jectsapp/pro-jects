@@ -1,8 +1,21 @@
 language: node_js
+node_js:
+  - 13
 
 branches:
   only:
     - master
 
 script:
-  - npm run build
+  - yarn build
+
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN
+  keep_history: true
+  local_dir: dist/pro-jects
+  repo: pro-jectsapp/pro-jectsapp.github.io
+  target_branch: master
+  on:
+    branch: master
