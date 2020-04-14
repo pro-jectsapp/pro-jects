@@ -1,14 +1,4 @@
 <div class="projects-list__wrapper">
-  <h3>Favourite projects</h3>
-  <div class="projects-list__empty-caption" *ngIf="!orgProjects.length">
-    You haven't added any org project. To add one, use the plus icon, next it will automatically
-    stay there
-  </div>
-  <ul class="projects-list">
-    <li class="projects-list__item" *ngFor="let project of orgProjects">
-      <span>{{ project.name }}</span>
-    </li>
-  </ul>
   <h3>User's projects</h3>
   <div class="projects-list__empty-caption" *ngIf="!userProjects.length">
     You haven't created projects associated to your account

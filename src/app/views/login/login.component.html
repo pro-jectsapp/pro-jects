@@ -1,0 +1,9 @@
+<div class="login__wrapper">
+  <h1>(pro)jects</h1>
+  <p>A better UI for GitHub Projects 📟</p>
+  <form class="login-form">
+    <label for="tokenInput">Paste your GitHub Access Token here:</label>
+    <input type="password" id="tokenInput" class="login-form__input" [(ngModel)]="tokenValue" name="token"/>
+    <button class="login-form__button" (click)="login()">Login</button>
+  </form>
+</div>

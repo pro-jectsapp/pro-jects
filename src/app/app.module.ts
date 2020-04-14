@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms';
 
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -16,7 +17,8 @@ import { ProjectViewComponent } from './components/project-view.component';
 import { MarkdownParsePipe } from './core/utils/markdown-parse.pipe';
 import { SafeHtmlPipe } from './core/utils/safe-html.pipe';
 import { CardComponent } from './components/card.component';
-import { FormsModule } from '@angular/forms';
+import { AuthService } from './core/services/auth.service';
+import { LoginComponent } from './components/login.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,7 @@ import { FormsModule } from '@angular/forms';
     MarkdownParsePipe,
     SafeHtmlPipe,
     CardComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,7 +40,7 @@ import { FormsModule } from '@angular/forms';
     FormsModule,
     MatProgressSpinnerModule,
   ],
-  providers: [GithubService, ProjectService],
+  providers: [GithubService, ProjectService, AuthService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

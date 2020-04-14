@@ -19,15 +19,59 @@
   align-items: center
 
   .nav-block__image
-    margin: 0 10px
     height: 32px
     width: 32px
 
   .nav-block__image--rounded
-    border-radius: 50%
+    border-radius: 10px
 
   .nav-block__heading
     margin: 0
+
+  .user-details__summary
+    margin: 0 10px
+    display flex
+    align-items center
+
+    &::-webkit-details-marker
+      display: none
+
+  .user-details
+    position: absolute
+    background-color: #ffffff
+    color: black
+    right: 20px
+    box-shadow: 0 0 5px 0 #16151544
+    width: 200px
+    text-align left
+    margin-top: 2px
+    border-radius: 5px
+
+    hr
+      border-top: 1px solid #e1e4e8
+      margin: 0
+
+    p
+      margin: 15px
+
+    .user-details__list
+      list-style: none
+      margin: 0
+      padding: 0
+
+      li
+        display: block
+        padding: 10px 15px
+        cursor: pointer
+
+        &:last-child
+          border-bottom-left-radius 5px
+          border-bottom-right-radius 5px
+
+        &:hover
+          background-color: #0366d6
+          color: white
+
 
 .app
   width: 100%
