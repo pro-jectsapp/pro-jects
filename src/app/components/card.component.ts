@@ -15,6 +15,7 @@ enum Direction {
 })
 export class CardComponent {
   @Input() card: any;
+  @Input() column: any;
   @Output() moveUp = new EventEmitter();
   @Output() moveDown = new EventEmitter();
   @Output() delete = new EventEmitter();
@@ -47,7 +48,7 @@ export class CardComponent {
 
   async closeEditor() {
     this.isBusy = true;
-    await this.projectService.refreshProjectCards();
+    await this.projectService.refreshColumnCards(this.column);
     this.editorContent = '';
     this.isEditing = false;
     this.isBusy = false;
@@ -56,7 +57,7 @@ export class CardComponent {
   async saveCardAndCloseEditor() {
     this.isBusy = true;
     await this.githubService.saveCard(this.card.id, this.editorContent);
-    await this.projectService.refreshProjectCards();
+    await this.projectService.refreshColumnCards(this.column);
     this.editorContent = '';
     this.isEditing = false;
     this.isBusy = false;

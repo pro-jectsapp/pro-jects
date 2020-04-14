@@ -24,6 +24,7 @@
     "@angular/router": "~9.1.0",
     "@octokit/rest": "^17.1.4",
     "angular-split": "^3.0.3",
+    "devpun": "^1.5.0",
     "marked": "^0.8.2",
     "minimist": "^1.2.5",
     "ngx-monaco-editor": "^9.0.0",

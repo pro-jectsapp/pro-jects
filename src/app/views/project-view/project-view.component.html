@@ -1,34 +1,57 @@
 <div class="project-view__wrapper" *ngIf="projectService.currentProject; else noProjectBlock">
   <div class="project-view-bar">
     <mat-icon
-      class="project-view-bar__icon project-view-bar__icon--active"
+      class="project-view-bar__icon"
+      [class]="viewMode === 0 ? 'project-view-bar__icon--active' : ''"
+      (click)="setViewMode(0)"
       style="transform: scale(1.25);"
       title="Column Switch View"
       >vertical_split</mat-icon
     >
-    <mat-icon class="project-view-bar__icon" title="Column View">dashboard</mat-icon>
+    <mat-icon
+      class="project-view-bar__icon"
+      (click)="setViewMode(1)"
+      [class]="viewMode === 1 ? 'project-view-bar__icon--active' : ''"
+      title="Column View"
+      >dashboard</mat-icon
+    >
   </div>
   <div class="project-view">
     <div class="columns-list__wrapper">
-      <span class="columns-list__header">Columns</span>
+      <div class="columns-list__header">
+        <span>Column</span>
+        <mat-icon
+          style="
+            width: 12px;
+            height: 12px;
+            font-size: 12px;
+            transform: scale(1.25);
+            cursor: pointer;
+          "
+          (click)="addColumn()"
+          >add</mat-icon
+        >
+      </div>
       <ul class="columns-list">
         <li
           *ngFor="let column of this.projectService.currentProject.columns; index as i"
-          (click)="onColumnClicked(i)"
-          class="columns-list__item"
+          class="columns-list__item__wrapper"
           [class]="
             selectedColumn !== undefined
               ? this.projectService.currentProject.columns[selectedColumn].id === column.id
-                ? 'columns-list__item--selected'
+                ? 'columns-list__item__wrapper--selected'
                 : ''
               : ''
           "
         >
-          {{ column.name }}
+          <div (click)="onColumnClicked(i)" class="columns-list__item">
+            {{ column.name }}
+          </div>
+          <span class="delete-button" (click)="deleteColumn(column, i)">delete</span>
         </li>
       </ul>
     </div>
-    <div class="cards-view--switch-view" *ngIf="selectedColumn !== undefined">
+    <div class="cards-view cards-view--switch-view" *ngIf="selectedColumn !== undefined">
       <app-card
         *ngFor="
           let card of this.projectService.currentProject.columns[selectedColumn].cards;
@@ -38,8 +61,10 @@
         (moveDown)="moveCard(card, i + 1, i)"
         (delete)="deleteCard(card, i)"
         [card]="card"
+        [column]="selectedColumn"
       >
       </app-card>
+      <button class="cards-view__add-button" (click)="addCard()">Add a new card</button>
     </div>
   </div>
 </div>

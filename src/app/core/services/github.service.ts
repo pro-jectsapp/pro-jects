@@ -77,4 +77,19 @@ export class GithubService {
     await this.checkUser();
     await this.octokit.projects.deleteCard({ card_id: cardId });
   }
+
+  async createColumn(projectId, name): Promise<void> {
+    await this.checkUser();
+    await this.octokit.projects.createColumn({ project_id: projectId, name });
+  }
+
+  async createCard(columnId, note): Promise<void> {
+    await this.checkUser();
+    await this.octokit.projects.createCard({ column_id: columnId, note });
+  }
+
+  async deleteColumn(columnId): Promise<void> {
+    await this.checkUser();
+    await this.octokit.projects.deleteColumn({ column_id: columnId });
+  }
 }
