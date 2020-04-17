@@ -12,10 +12,8 @@ export class LoginComponent {
   constructor(private authService: AuthService) {}
 
   login() {
-    if (this.tokenValue && this.tokenValue.length === 40) {
-      this.authService.setUser(this.tokenValue);
-    } else {
-      alert('Give valid GitHub Access Token');
-    }
+    const redirectUrl = 'localhost';
+    const clientId = '9031bbfc20036dd75d11';
+    window.location.href = `https://github.com/login/oauth/authorize?scope=repo%20write%3Aorg%20user&client_id=${clientId}`;
   }
 }

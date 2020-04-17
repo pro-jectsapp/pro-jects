@@ -40,7 +40,7 @@ import { LoginComponent } from './components/login.component';
     FormsModule,
     MatProgressSpinnerModule,
   ],
-  providers: [GithubService, ProjectService, AuthService],
+  providers: [AuthService, GithubService, ProjectService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
