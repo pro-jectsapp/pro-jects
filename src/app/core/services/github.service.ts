@@ -37,7 +37,13 @@ export class GithubService {
       if (this.ghUser) {
         return true;
       } else {
-        const res = await this.octokit.users.getAuthenticated();
+        let res;
+        try {
+          res = await this.octokit.users.getAuthenticated();
+        } catch (err) {
+          this.authService.logoutUser();
+          return false;
+        }
         this.ghUser = res.data;
         return true;
       }

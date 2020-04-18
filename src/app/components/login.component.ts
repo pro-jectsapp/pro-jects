@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../core/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -7,13 +6,10 @@ import { AuthService } from '../core/services/auth.service';
   styleUrls: ['../views/login/login.component.styl'],
 })
 export class LoginComponent {
-  tokenValue: string;
-
-  constructor(private authService: AuthService) {}
+  constructor() {}
 
   login() {
-    const redirectUrl = 'localhost';
-    const clientId = '9031bbfc20036dd75d11';
+    const clientId = '435bb3ee9ba9d983cb60';
     window.location.href = `https://github.com/login/oauth/authorize?scope=repo%20write%3Aorg%20user&client_id=${clientId}`;
   }
 }
