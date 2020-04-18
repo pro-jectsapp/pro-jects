@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Octokit } from '@octokit/rest/dist-web';
+import { Octokit } from '@octokit/rest';
 
 import { AuthService } from './auth.service';
 
