@@ -11,7 +11,7 @@
       <h3 class="nav-block__heading">(pro)jects</h3>
     </div>
     <div class="nav-block">
-      <details *ngIf="authService.isLoggedIn()">
+      <details *ngIf="authService.isLoggedIn()" class="user-details__wrapper">
         <summary class="user-details__summary">
           <img
             src="{{ githubService.ghUser.avatar_url }}"
@@ -21,8 +21,9 @@
           <mat-icon>arrow_drop_down</mat-icon>
         </summary>
         <div class="user-details">
-          <p>Signed in as <b>{{ githubService.ghUser ? githubService.ghUser.login : '...' }}</b></p>
-          <hr />
+          <p>
+            Signed in as <b>{{ githubService.ghUser ? githubService.ghUser.login : '...' }}</b>
+          </p>
           <ul class="user-details__list">
             <li (click)="logout()">Log out</li>
           </ul>

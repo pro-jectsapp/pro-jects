@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
+import { AuthService } from '../core/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -6,7 +7,24 @@ import { Component } from '@angular/core';
   styleUrls: ['../views/login/login.component.styl'],
 })
 export class LoginComponent {
-  constructor() {}
+  private keystrokesHistory = '';
+
+  constructor(private authService: AuthService) {}
+
+  @HostListener('document:keydown', ['$event'])
+  onKeyDown(e) {
+    this.keystrokesHistory += e.key;
+
+    if (this.keystrokesHistory === 'dev') {
+      const token = prompt(
+        'Entered dev mode. Now you can enter the access token manually, without using oauth',
+      );
+      if (token) {
+        this.authService.setUser(token);
+      }
+      this.keystrokesHistory = '';
+    }
+  }
 
   login() {
     const clientId = '435bb3ee9ba9d983cb60';

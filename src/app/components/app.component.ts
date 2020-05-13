@@ -27,9 +27,9 @@ export class AppComponent implements OnInit {
         axios.get(`https://pro-jects.now.sh/api/authorize?code=${map.code}`).then(res => {
           if (res.data.access_token) {
             this.authService.setUser(res.data.access_token);
-          }
 
-          window.location.href = '/';
+            window.location.href = '/';
+          }
         });
       }
     });
