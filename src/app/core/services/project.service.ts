@@ -11,13 +11,15 @@ export class ProjectService {
   constructor(private githubService: GithubService) {}
 
   async setCurrentProject(projectId: number): Promise<void> {
-    this.currentProject = await this.githubService.getProject(projectId);
-    this.currentProject.columns = await this.githubService.getProjectColumns(projectId);
+    if (!(this.currentProject && this.currentProject.id === projectId)) {
+      this.currentProject = await this.githubService.getProject(projectId);
+      this.currentProject.columns = await this.githubService.getProjectColumns(projectId);
 
-    this.projectChanged.emit(this.currentProject);
+      this.projectChanged.emit(this.currentProject);
 
-    for (const col of this.currentProject.columns) {
-      col.cards = await this.githubService.getColumnCards(col.id);
+      for (const col of this.currentProject.columns) {
+        col.cards = await this.githubService.getColumnCards(col.id);
+      }
     }
   }
 

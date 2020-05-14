@@ -19,6 +19,7 @@ import { SafeHtmlPipe } from './core/utils/safe-html.pipe';
 import { CardComponent } from './components/card.component';
 import { AuthService } from './core/services/auth.service';
 import { LoginComponent } from './components/login.component';
+import { FavService } from './core/services/fav.service';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,7 @@ import { LoginComponent } from './components/login.component';
     FormsModule,
     MatProgressSpinnerModule,
   ],
-  providers: [AuthService, GithubService, ProjectService],
+  providers: [AuthService, GithubService, ProjectService, FavService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -126,9 +126,9 @@ export class GithubService {
     }
   }
 
-  async createColumn(projectId, name): Promise<void> {
+  async createColumn(projectId, name): Promise<any> {
     if (await this.checkUser()) {
-      await this.octokit.projects.createColumn({ project_id: projectId, name });
+      return await this.octokit.projects.createColumn({ project_id: projectId, name });
     }
   }
 

@@ -16,11 +16,6 @@ Array.prototype.move = function (from, to) {
   this.splice(to, 0, this.splice(from, 1)[0]);
 };
 
-enum ViewMode {
-  Switch,
-  Columns,
-}
-
 @Component({
   selector: 'app-project-view',
   templateUrl: '../views/project-view/project-view.component.html',
@@ -30,7 +25,6 @@ enum ViewMode {
 export class ProjectViewComponent implements OnInit {
   @Output() columnSelected = new EventEmitter();
   selectedColumn: number;
-  viewMode: ViewMode = ViewMode.Switch;
 
   @ViewChild(CardComponent) firstCard: CardComponent;
 
@@ -80,18 +74,19 @@ export class ProjectViewComponent implements OnInit {
     }
   }
 
-  setViewMode(mode) {
-    if (mode !== this.viewMode) {
-      this.viewMode = mode;
-    }
-  }
-
   addColumn() {
     const name = prompt('Give title for the column');
     if (name && name !== '') {
-      this.githubService.createColumn(this.projectService.currentProject.id, name).then(() => {
-        this.projectService.refreshProjectColumns();
-      });
+      this.githubService
+        .createColumn(this.projectService.currentProject.id, name)
+        .then(({ data }) => {
+          this.projectService.refreshProjectColumns().then(() => {
+            const index = this.projectService.currentProject.columns.findIndex(
+              col => col.id === data.id,
+            );
+            this.onColumnClicked(index);
+          });
+        });
     }
   }
 

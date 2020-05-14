@@ -1,21 +1,4 @@
 <div class="project-view__wrapper" *ngIf="projectService.currentProject; else noProjectBlock">
-  <div class="project-view-bar">
-    <mat-icon
-      class="project-view-bar__icon"
-      [class]="viewMode === 0 ? 'project-view-bar__icon--active' : ''"
-      (click)="setViewMode(0)"
-      style="transform: scale(1.25);"
-      title="Column Switch View"
-      >vertical_split</mat-icon
-    >
-    <mat-icon
-      class="project-view-bar__icon"
-      (click)="setViewMode(1)"
-      [class]="viewMode === 1 ? 'project-view-bar__icon--active' : ''"
-      title="Column View"
-      >dashboard</mat-icon
-    >
-  </div>
   <div class="project-view">
     <div class="columns-list__wrapper">
       <div class="columns-list__header">

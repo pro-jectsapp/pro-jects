@@ -6,19 +6,46 @@
 
 .projects-list__empty-caption
   color: gray
-  margin: 5px 0 0 1em
+  margin: 5px 0 5px 1em
   font-size: .8em
 
 .projects-list
   margin-top: 5px
+  padding-left: 10px
+  margin-bottom: 10px;
   overflow: auto
 
   .projects-list__item
-    span
+    position: relative
+    padding-right: 20px
+
+    &__icon
+      height: 1rem
+      vertical-align: -10%
+
+    &__label
       color: #0366d6
-      text-decoration: none
+      display: inline-block
       font-weight: 600
       cursor: pointer
+      margin-left: 10px
 
       &:hover
         text-decoration: underline
+
+    &__action
+      visibility: hidden
+      display: inline-flex
+      align-items: center
+      cursor: pointer
+      height: 100%
+      position: absolute
+      margin-left: 5px
+      fill: #d3d4d5
+
+      &:hover
+        fill: #b1b2b3
+
+    &:hover
+      .projects-list__item__action
+        visibility: visible
